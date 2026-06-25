@@ -1,4 +1,5 @@
 import { defineConfig } from "rolldown";
+import { bundleAnalyzerPlugin } from "rolldown/experimental";
 
 export default defineConfig({
   platform: "node",
@@ -6,5 +7,11 @@ export default defineConfig({
   output: {
     file: "dist/index.js",
     format: "esm",
+    minify: true,
   },
+  plugins: [
+    bundleAnalyzerPlugin({
+      format: "md",
+    }),
+  ],
 });
