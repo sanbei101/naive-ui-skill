@@ -2,9 +2,8 @@ import { describe, it, expect } from "vitest";
 import * as fs from "fs";
 import * as path from "path";
 
-const OUTPUT_DIR = path.resolve(__dirname, "..", "docs-output");
+const OUTPUT_DIR = path.resolve(__dirname, "..", "references");
 
-// 检查 docs-output 是否存在
 const docsExist = fs.existsSync(OUTPUT_DIR);
 
 // 获取所有组件目录

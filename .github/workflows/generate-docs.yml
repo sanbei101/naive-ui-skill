@@ -39,32 +39,24 @@ jobs:
         run: git clone --depth 1 https://github.com/tusen-ai/naive-ui.git naive
 
       - name: Extract docs
-        run: npx tsx scripts/extract-docs.ts ./naive ./docs-output
+        run: npx tsx scripts/extract-docs.ts ./naive ./references
 
       - name: Run tests
         run: npx vitest run
 
-      - name: Generate README for doc branch
+      - name: Commit and Push to main
         run: |
-          cat > ./docs-output/README.md << 'EOF'
-          # Naive UI 中文文档
-          本分支包含从 [naive-ui](https://github.com/tusen-ai/naive-ui) 自动提取的中文文档。
+          # 配置 Git 机器人身份
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
 
-          ## 目录结构
-          ```
-          <component>/
-          ├── api.md    # API 文档
-          └── demo.md   # 示例代码
-          ```
-          ## 更新频率
-          每天自动更新
-          EOF
+          # 暂存 references 文件夹的变更
+          git add references/
 
-      - name: Deploy to doc branch
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs-output
-          publish_branch: doc
-          force_orphan: true
-          enable_jekyll: true
+          # 检查是否有文档更新,只有在有变动时才提交,防止无变动时报错导致工作流失败
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: auto-update naive-ui components documentation [skip ci]"
+            git push origin main
+          else
+            echo "没有检测到文档变化,跳过提交。"
+          fi
