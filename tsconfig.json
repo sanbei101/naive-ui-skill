@@ -8,8 +8,8 @@
     "skipLibCheck": true,
     "types": ["node"],
     "outDir": "dist",
-    "rootDir": "."
+    "rootDir": ".",
   },
-  "include": ["scripts/**/*.ts", "tests/**/*.ts"],
-  "exclude": ["node_modules", "docs-output", "naive"]
+  "include": ["scripts/**/*.ts", "tests/**/*.ts", "src/**/*.ts"],
+  "exclude": ["node_modules", "docs-output", "naive"],
 }
