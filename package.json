@@ -1,9 +1,9 @@
 {
-  "name": "naive-ui-docs",
+  "name": "naive-ui-mcp",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
   "type": "module",
-  "description": "自动提取 Naive UI 中文文档",
+  "description": "naive-ui的mcp服务",
   "scripts": {
     "extract": "tsx scripts/extract-docs.ts",
     "test": "vitest run",
@@ -20,5 +20,9 @@
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.29.0",
     "zod": "^4.4.3"
-  }
+  },
+  "files": [
+    "dist",
+    "references"
+  ]
 }
