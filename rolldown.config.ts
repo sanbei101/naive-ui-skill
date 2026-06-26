@@ -8,6 +8,7 @@ export default defineConfig({
     file: "dist/index.js",
     format: "esm",
     minify: true,
+    banner: "#!/usr/bin/env node",
   },
   plugins: [
     bundleAnalyzerPlugin({
